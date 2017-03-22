@@ -1,4 +1,7 @@
 ﻿namespace code.web.features.list_people
 {
-  public delegate Data IFetchDataUsingTheRequest<Data>(IProvideDetailsAboutAWebRequest request);
+	public interface IFetchDataUsingTheRequest<out Data>
+	{
+		Data fetch_using_request(IProvideDetailsAboutAWebRequest request);
+	}
 }

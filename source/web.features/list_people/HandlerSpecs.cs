@@ -24,11 +24,8 @@ namespace code.web.features.list_people
         request = fake.an<IProvideDetailsAboutAWebRequest>();
         response = depends.on<ISendResponsesToTheClient>();
         data = Enumerable.Range(1, 100).Select(x => new Person());
-        depends.on<IFetchDataUsingTheRequest<IEnumerable<Person>>>(x =>
-        {
-          x.ShouldEqual(request);
-          return data;
-        });
+		data_fetcher = depends.on<IFetchDataUsingTheRequest<IEnumerable<Person>>>();
+		data_fetcher.setup(x => x.fetch_using_request(request)).Return(data);
       };
 
       Because b = () =>
@@ -38,7 +35,8 @@ namespace code.web.features.list_people
         response.should().received(x => x.send(data));
 
       static IProvideDetailsAboutAWebRequest request;
-      static ISendResponsesToTheClient response;
+	  static IFetchDataUsingTheRequest<IEnumerable<Person>> data_fetcher;
+	  static ISendResponsesToTheClient response;
       static IEnumerable<Person> data;
     }
   }

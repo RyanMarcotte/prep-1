@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using code.prep.people;
 using code.web.stubs;
 
@@ -21,7 +22,12 @@ namespace code.web.features.list_people
 
     public void process(IProvideDetailsAboutAWebRequest request)
 	  {
-      response.send(all_people_query(request));
+      response.send(all_people_query.fetch_using_request(request));
 	  }
   }
+
+	public interface IExecuteAQuery<Data>
+	{
+		Data IExecuteAQury<Data>();
+	} 
 }

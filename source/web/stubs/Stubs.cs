@@ -20,8 +20,7 @@ namespace code.web.stubs
       yield return new RequestHandler(x => true, new Handler());
     }
 
-    public static IFetchDataUsingTheRequest<IEnumerable<Person>> dummy_list_of_people = x =>
-      Enumerable.Range(1, 100).Select(y => new Person());
+	  public static IFetchDataUsingTheRequest<IEnumerable<Person>> dummy_list_of_people = new StubDataFetcher();
 
     public static ISendResponsesToTheClient dummy_response_engine()
     {
@@ -41,4 +40,12 @@ namespace code.web.stubs
   {
 
   }
+
+	public class StubDataFetcher : IFetchDataUsingTheRequest<IEnumerable<Person>>
+	{
+		public IEnumerable<Person> fetch_using_request(IProvideDetailsAboutAWebRequest request)
+		{
+			return Enumerable.Range(1, 100).Select(y => new Person());
+		}
+	}
 }
