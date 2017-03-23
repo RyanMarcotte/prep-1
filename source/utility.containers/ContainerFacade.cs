@@ -13,14 +13,14 @@ namespace code.utility.containers
 
     public ItemToFetch an<ItemToFetch>()
     {
-      var factory = factory_registry.get_factory_that_can_create(typeof(ItemToFetch));
-
-      return (ItemToFetch)factory.create();
+	    return (ItemToFetch)an(typeof(ItemToFetch));
     }
 
     public object an(Type type_to_fetch)
     {
-      throw new NotImplementedException();
-    }
+		var factory = factory_registry.get_factory_that_can_create(type_to_fetch);
+
+		return factory.create();
+	}
   }
 }
