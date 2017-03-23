@@ -9,8 +9,12 @@ namespace code.utility.iteration
     public static Result sum<Element, Result>(this IEnumerable<Element> items,
       IGetTheValueOfAProperty<Element, Result> accessor)
     {
-      throw new NotImplementedException();
-
+	    return items.reduce(default(Result), (e, step_value) =>
+	    {
+			dynamic first = e;
+			dynamic second = accessor(step_value);
+			return first + second;
+	    });
     }
 
     public static Result get_result_of_processing_all_with<Element, Result>(this IEnumerable<Element> items,
