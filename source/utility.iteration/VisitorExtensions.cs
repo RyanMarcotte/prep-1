@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using code.utility.core;
 
 namespace code.utility.iteration
@@ -19,6 +20,12 @@ namespace code.utility.iteration
           }));
 
     }
+
+	  public static Result avg<Element, Result>(this IEnumerable<Element> items, IGetTheValueOfAProperty<Element, Result> accessor)
+	  {
+		  var sum = items.sum(accessor);
+		  return (dynamic)sum / items.Count();
+	  }
 
     public static Result get_result_of_processing_all_with<Element, Result>(this IEnumerable<Element> items,
       IProcessAndReturnAValue<Element, Result> visitor)
