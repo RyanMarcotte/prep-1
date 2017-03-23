@@ -2,8 +2,8 @@
 
 namespace code.utility.containers
 {
-    internal interface IFindFactoriesForAType
+    public interface IFindFactoriesForAType
     {
-        void get_resolver_for_type(Type the_type);
+        object get_resolver_for_type(Type the_type);
     }
 }
